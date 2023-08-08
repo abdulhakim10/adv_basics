@@ -18,6 +18,9 @@ class ActionButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(40),
             )),
-        child: Text(actionText));
+        child: Text(
+          actionText,
+          textAlign: TextAlign.center,
+        ));
   }
 }
