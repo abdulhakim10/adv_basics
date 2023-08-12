@@ -1,6 +1,6 @@
 import 'package:adv_basics/data/questions.dart';
 import 'package:adv_basics/questions_summary.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -24,6 +24,12 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(context) {
+    final summaryData = getSummaryData();
+    final numOfTotalQuestions = questions.length;
+    final numOfCorrectQuestions = summaryData.where((element) {
+      return element['correct_answer'] == element['user_answer'];
+    }).length;
+
     return SizedBox(
       width: double.infinity,
       child: Container(
@@ -31,9 +37,10 @@ class ResultScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Your answered X out of Y questions correctly!'),
+            Text(
+                'Your answered $numOfCorrectQuestions out of $numOfTotalQuestions questions correctly!'),
             const SizedBox(height: 30),
-            QuestionsSummary(getSummaryData()),
+            QuestionsSummary(summaryData),
             const SizedBox(height: 30),
             TextButton(onPressed: () {}, child: const Text('Restart quiz'))
           ],
